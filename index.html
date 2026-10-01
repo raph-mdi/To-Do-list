@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f6f1">
+    <title>Ma liste de tâches</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <p class="eyebrow">Mon espace</p>
+        <button class="theme-button" id="theme-toggle" type="button" aria-pressed="false">
+          Mode sombre
+        </button>
+      </header>
+
+      <section class="welcome" aria-labelledby="page-title" id="nickname">
+        <h1 id="page-title">Ma liste de tâches</h1>
+        <form class="name-form" id="name-form">
+          <label for="username">Comment tu t’appelles ?</label>
+          <div class="form-row">
+            <input id="username" name="username" type="text" placeholder="Ton pseudo" autocomplete="nickname">
+            <button id="valider" type="submit">Valider</button>
+          </div>
+        </form>
+        <p class="greeting" id="greeting"></p>
+      </section>
+
+      <section class="tasks" aria-labelledby="tasks-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Aujourd’hui</p>
+            <h2 id="tasks-title">Mes tâches</h2>
+          </div>
+          <button class="reset-button" id="reset-button" type="button">Réinitialiser</button>
+        </div>
+
+        <form class="task-form" id="task-form">
+          <label class="visually-hidden" for="task-input">Nouvelle tâche</label>
+          <input id="task-input" name="task" type="text" placeholder="Ajouter une tâche...">
+          <button type="submit">Ajouter</button>
+        </form>
+
+        <p class="empty-state" id="empty-state">Aucune tâche pour le moment.</p>
+        <ul class="task-list" id="task-list" aria-label="Liste des tâches"></ul>
+      </section>
+
+      <aside class="quote" aria-labelledby="quote-title">
+        <p class="eyebrow">Petite pause</p>
+        <h2 id="quote-title">La pensée du jour</h2>
+        <p id="quote-text">Une chose à la fois, et chaque chose à sa place.</p>
+      </aside>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
