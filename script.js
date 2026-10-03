@@ -63,6 +63,23 @@ function ajouter(event){
     taskList.appendChild(elementListe)
 }
 
+function afficherTaches() {
+    userName = localStorage.getItem("name")
+    if (localStorage.getItem(`${userName}`) !== null) {
+        const listeStockageBis = JSON.parse(localStorage.getItem(`${userName}`))
+        
+        listeStockageBis.forEach((item) => {
+            const elementListe = document.createElement("li")
+            elementListe.textContent = item
+            elementListe.classList.add("task-item")
+            taskList.appendChild(elementListe)
+            paragrapheBis.textContent = "éléments sauvegardés dans la mémoire cache"
+        })
+    }
+}
+
+afficherTaches()
+
 taskList.addEventListener("click", (event) => {
     if (event.target.matches(".task-item")) {
         event.target.remove()
