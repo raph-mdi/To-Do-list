@@ -79,10 +79,11 @@ function afficherTaches() {
         paragrapheBis.textContent = "Éléments sauvegardés dans la mémoire cache."
     }
 
-    liste.forEach((item) => {
+    liste.forEach((item, index) => {
         const elementListe = document.createElement("li")
         elementListe.textContent = item
         elementListe.classList.add("task-item")
+        elementListe.dataset.index = index
         taskList.appendChild(elementListe)
     })
 }
