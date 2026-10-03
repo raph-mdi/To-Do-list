@@ -56,8 +56,16 @@ function ajouter(event){
     liste.push(valeur) 
     userName = localStorage.getItem("name")
     const listeStockage = localStorage.setItem(userName, JSON.stringify(liste))
-    paragrapheBis.textContent = liste 
+    paragrapheBis.textContent = `tâche n°${index + 1} ajoutée : ${valeur}`
+    const elementListe = document.createElement("li")
+    elementListe.textContent = liste[liste.length - 1]
+    elementListe.classList.add("task-item")
+    taskList.appendChild(elementListe)
 }
-// il me reste à mettre les éléments de tableau dans une liste avec le DOM 
 
+taskList.addEventListener("click", (event) => {
+    if (event.target.matches(".task-item")) {
+        event.target.remove()
+    }
+})
 
