@@ -93,6 +93,7 @@ afficherTaches()
 taskList.addEventListener("click", (event) => {
     if (event.target.matches(".task-item")) {
         liste.splice(Number(event.target.dataset.index), 1)
+        paragrapheBis.textContent = "Tâche supprimée"
         sauvegarderTaches()
         afficherTaches()
     }
