@@ -197,6 +197,14 @@ h2 {
   --soft-accent: #273b30;
 }
 
+li {
+  list-style: square;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 480px) {
   .app {
     width: min(100% - 28px, 680px);
