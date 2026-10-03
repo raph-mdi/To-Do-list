@@ -14,15 +14,15 @@ function setName(event) {
 
 }
 
-function afficher(){
-    if(localStorage.getItem("name") !== null){
+function afficher() {
+    if (localStorage.getItem("name") !== null) {
         formulaire.style.display = "none"
         userName = localStorage.getItem("name")
         paragraphe.textContent = `Bonjour, ${userName}`
     } else {
-        formulaire.style.display ="block"
+        formulaire.style.display = "block"
     }
-} 
+}
 
 afficher()
 
@@ -30,7 +30,7 @@ const toogleBtn = document.getElementById("theme-toggle")
 
 toogleBtn.addEventListener("click", themeSwitch)
 
-function themeSwitch(){
+function themeSwitch() {
     const isDarkMode = document.body.classList.toggle("dark-mode")
     if (isDarkMode) {
         toogleBtn.textContent = "Mode clair"
@@ -46,43 +46,61 @@ function themeSwitch(){
 const tachesASaisir = document.getElementById("task-input")
 const formulaireBis = document.getElementById("task-form")
 const paragrapheBis = document.getElementById("empty-state")
-const liste = []
+const taskList = document.getElementById("task-list")
+const cleStockageTaches = localStorage.getItem("name")
+const tachesSauvegardees = localStorage.getItem(cleStockageTaches)
+const liste = tachesSauvegardees === null ? [] : JSON.parse(tachesSauvegardees)
 
 formulaireBis.addEventListener("submit", ajouter)
 
-function ajouter(event){
+function ajouter(event) {
     event.preventDefault()
-    const valeur = tachesASaisir.value
-    liste.push(valeur) 
-    userName = localStorage.getItem("name")
-    const listeStockage = localStorage.setItem(userName, JSON.stringify(liste))
-    paragrapheBis.textContent = `tâche n°${index + 1} ajoutée : ${valeur}`
-    const elementListe = document.createElement("li")
-    elementListe.textContent = liste[liste.length - 1]
-    elementListe.classList.add("task-item")
-    taskList.appendChild(elementListe)
+    const valeur = tachesASaisir.value.trim()
+    if (valeur) {
+        liste.push(valeur)
+        sauvegarderTaches()
+        afficherTaches()
+        paragrapheBis.textContent = `Tâche ajoutée : ${valeur}`
+        tachesASaisir.value = ""
+    } else {
+        paragrapheBis.textContent = "Saisis une tâche avant de l’ajouter."
+    }
+}
+
+function sauvegarderTaches() {
+    localStorage.setItem(localStorage.getItem("name"), JSON.stringify(liste))
 }
 
 function afficherTaches() {
-    userName = localStorage.getItem("name")
-    if (localStorage.getItem(`${userName}`) !== null) {
-        const listeStockageBis = JSON.parse(localStorage.getItem(`${userName}`))
-        
-        listeStockageBis.forEach((item) => {
-            const elementListe = document.createElement("li")
-            elementListe.textContent = item
-            elementListe.classList.add("task-item")
-            taskList.appendChild(elementListe)
-            paragrapheBis.textContent = "éléments sauvegardés dans la mémoire cache"
-        })
+    taskList.replaceChildren()
+    if (liste.length === 0) {
+        paragrapheBis.textContent = "Aucune tâche pour le moment."
+    } else {
+        paragrapheBis.textContent = "Éléments sauvegardés dans la mémoire cache."
     }
+
+    liste.forEach((item) => {
+        const elementListe = document.createElement("li")
+        elementListe.textContent = item
+        elementListe.classList.add("task-item")
+        taskList.appendChild(elementListe)
+    })
 }
 
 afficherTaches()
 
 taskList.addEventListener("click", (event) => {
     if (event.target.matches(".task-item")) {
-        event.target.remove()
+        liste.splice(Number(event.target.dataset.index), 1)
+        sauvegarderTaches()
+        afficherTaches()
     }
 })
 
+const reinitialisation = document.getElementById("reset-button")
+reinitialisation.addEventListener("click", reinitialiser)
+
+function reinitialiser() {
+    localStorage.clear()
+    paragrapheBis.textContent = "mémoire cache vidée"
+}
