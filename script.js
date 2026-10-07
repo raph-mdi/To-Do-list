@@ -106,3 +106,23 @@ function reinitialiser() {
     localStorage.clear()
     paragrapheBis.textContent = "mémoire cache vidée"
 }
+const citation = [
+"Pour gagner, il faut risquer de perdre.- Jean-Claude Killy",
+"Le succès n’est pas la clé du bonheur. Le bonheur est la clé du succès.- Albert Schweitzer",
+"Le succès, c’est se promener d’échec en échec tout en restant motivé.- Winston Churchill",
+"Si vous n’essayez jamais, vous ne réussirez jamais, mais si vous essayez, vous risquez de vous étonner vous-même.- Charles-Augustin Sainte-Beuve", 
+"Ce n’est ni la finance, ni la stratégie, ni la technologie, mais le travail d’équipe qui demeure l’avantage compétitif ultime, parce qu’il est si puissant et si rare.- Patrick Lencioni", 
+"Se réunir est un début, rester ensemble est un progrès, travailler ensemble est la réussite.- Henry Ford",
+"Les meilleures choses qui arrivent dans le monde de l’entreprise ne sont pas le résultat du travail d’un seul homme. C’est le travail de toute une équipe.- Steve Jobs",
+" La réussite appartient à tout le monde. C’est au travail d’équipe qu’en revient le mérite.- Franck Piccard",
+"Le travail d’équipe est le secret qui permet aux gens ordinaires de réaliser des résultats extraordinaires.- Ifeanyi Enoch Onuoha",
+"Le travail d’équipe est le carburant qui permet aux gens ordinaires d’atteindre des résultats extraordinaires.- Andrew Carnegie",
+" Aucun de nous ne sait ce que nous savons tous, ensemble.- Euripide",
+]
+
+const quoteText = document.getElementById("quote-text")
+function afficherCitation() {
+    const citationAleatoire = citation[Math.floor(Math.random() * citation.length)]
+    quoteText.textContent = citationAleatoire
+}
+afficherCitation()
